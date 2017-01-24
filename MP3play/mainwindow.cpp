@@ -16,6 +16,11 @@ MainWindow::MainWindow(QWidget *parent) :
     mediaList->setCurrentIndex(1);
     player->setPlaylist(mediaList);
 
+    //设置音量大小
+    mediaVolume=50;
+    ui-> verticalSlider->setValue(mediaVolume);
+    player->setVolume(mediaVolume);
+
 }
 
 MainWindow::~MainWindow()
@@ -29,7 +34,7 @@ void MainWindow::on_But_play_clicked()
     {
         player->play();
 
-          QString title = player->metaData("Title").toString();
+        QString title = player->metaData("Title").toString();
         ui->  lab_mediaName->setText(title);
         //lab_mediaName
         ui->But_play->setText(tr("暂停"));
@@ -55,7 +60,7 @@ void MainWindow:: test( )
         QString Filename = file.at(i).absoluteFilePath();
         qDebug()<< Filename<<"";
 
-         mediaList->addMedia(QUrl::fromLocalFile(Filename));
+        mediaList->addMedia(QUrl::fromLocalFile(Filename));
 
     }
     qDebug()<< mediaList->mediaCount()<<" 歌曲数目 \n";
@@ -69,10 +74,15 @@ QFileInfoList MainWindow:: GetFileList(QString path)
 
     filters << "*.mp3";
     filters << "*.wma";
- //   filters << "*.flac";
-//    filters << "*.wma";
+    //   filters << "*.flac";
+    //    filters << "*.wma";
 
 
+    //int 4gh=0;
+    //int gh4=0;
+
+
+    gh4=4;
     //  filters<<QString("*.jpeg")<<QString("*.jpg")<<QString("*.png")<<QString("*.tiff")<<QString("*.gif")<<QString("*.bmp");
     dir.setNameFilters(filters); //这个就是设置过滤的文件名使用通配符
 
@@ -109,4 +119,10 @@ void MainWindow::on_but_MediaNext_clicked()
         currentIndex=0;
     mediaList->setCurrentIndex(currentIndex);
 
+}
+
+void MainWindow::on_verticalSlider_valueChanged(int value)
+{
+    mediaVolume=value ;
+    player->setVolume(mediaVolume);
 }

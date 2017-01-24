@@ -31,6 +31,8 @@ private slots:
 
     void on_but_MediaNext_clicked();
 
+    void on_verticalSlider_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
 
@@ -39,7 +41,7 @@ private:
     QMediaPlaylist  *mediaList;
 
     QFileInfoList *FileInfoList;
-
+int mediaVolume;
 };
 
 #endif // MAINWINDOW_H
